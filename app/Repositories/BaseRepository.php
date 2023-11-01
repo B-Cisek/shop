@@ -14,7 +14,7 @@ class BaseRepository
 
     public function __construct(string $modelClass)
     {
-        $this->model = new $modelClass;
+        $this->model = new $modelClass();
     }
 
     public function all(): Collection

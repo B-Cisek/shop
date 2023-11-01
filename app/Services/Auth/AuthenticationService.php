@@ -16,8 +16,7 @@ readonly class AuthenticationService
         private string $password,
         private bool $remember,
         private string $ip
-    )
-    {
+    ) {
     }
 
     /**
