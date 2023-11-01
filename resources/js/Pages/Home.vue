@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import PromoSection from "@/Components/PromoSection.vue";
-import CategoryPreviews from "@/Components/CategoryPreviews.vue";
-import MainLayout from "@/Layouts/MainLayout.vue";
+import Layout from "@/Layouts/Layout.vue";
+import PopularProductList from "@/Components/PopularProductList.vue";
+
+defineOptions({layout: Layout});
 </script>
 
 <template>
-    <MainLayout>
-        <PromoSection/>
-        <CategoryPreviews/>
-    </MainLayout>
+    <PromoSection/>
+    <PopularProductList />
 </template>

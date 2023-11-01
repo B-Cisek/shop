@@ -12,15 +12,17 @@ import {
     TabPanel,
     TabPanels,
     TransitionChild,
-    TransitionRoot,
+    TransitionRoot
 } from '@headlessui/vue'
-import {Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon, UserCircleIcon} from '@heroicons/vue/24/outline'
+import {Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon} from '@heroicons/vue/24/outline'
 import {onMounted, ref} from "vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import {Link, usePage} from '@inertiajs/vue3'
 import axios from "axios";
 import ProfileDropdown from "@/Components/ProfileDropdown.vue";
+import {useCartToggleStore} from "@/stores/cartToggle";
 
+const cartToggle = useCartToggleStore();
 const promoMessage = ref<string | null>(null);
 const page = usePage();
 
@@ -269,12 +271,12 @@ const navigation = {
             </Dialog>
         </TransitionRoot>
 
-        <header class="relative bg-white">
+        <header class="relative bg-white z-40">
             <p v-if="promoMessage"
                class="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8"
             >{{ promoMessage }}</p>
 
-            <nav aria-label="Top" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <nav aria-label="Top" class="mx-auto max-w-7xl px-4">
                 <div class="border-b border-gray-200">
                     <div class="flex h-16 items-center">
                         <button type="button" class="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
@@ -365,7 +367,8 @@ const navigation = {
                         </PopoverGroup>
 
                         <div class="ml-auto flex items-center">
-                            <div v-if="!auth.user" class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                            <div v-if="!auth.user"
+                                 class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                                 <Link :href="route('login')"
                                       class="text-sm font-medium text-gray-700 hover:text-gray-800">Zaloguj się
                                 </Link>
@@ -385,7 +388,7 @@ const navigation = {
                                 </a>
                             </div>
 
-                          <ProfileDropdown v-if="auth.user"/>
+                            <ProfileDropdown v-if="auth.user"/>
 
                             <!-- Search -->
                             <div class="flex lg:ml-6">
@@ -397,7 +400,7 @@ const navigation = {
 
                             <!-- Cart -->
                             <div class="ml-4 flow-root lg:ml-6">
-                                <button @click="openCart" class="group -m-2 flex items-center p-2">
+                                <button @click="cartToggle.setIsOpened(true)" class="group -m-2 flex items-center p-2">
                                     <ShoppingBagIcon
                                         class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                                         aria-hidden="true"/>

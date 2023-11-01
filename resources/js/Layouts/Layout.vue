@@ -7,7 +7,9 @@ import Footer from "@/Components/Footer.vue";
 <template>
     <div>
         <Navigation/>
-        <slot/>
+        <main class="max-w-7xl mx-auto">
+            <slot/>
+        </main>
         <Footer/>
         <ShoppingCart/>
     </div>

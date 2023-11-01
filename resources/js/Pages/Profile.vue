@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import Layout from "@/Layouts/Layout.vue";
 
-import MainLayout from "@/Layouts/MainLayout.vue";
+defineOptions({layout: Layout});
 </script>
 
 <template>
-  <MainLayout>
-    profile
-  </MainLayout>
+    <h1>Profile</h1>
 </template>
 
