@@ -2,13 +2,6 @@
 import Navigation from "@/Components/Navigation.vue";
 import ShoppingCart from "@/Components/ShoppingCart.vue";
 import Footer from "@/Components/Footer.vue";
-import {reactive} from "vue";
-import {usePage} from "@inertiajs/vue3";
-
-const { auth } = reactive(usePage().props);
-
-console.log(auth)
-
 </script>
 
 <template>

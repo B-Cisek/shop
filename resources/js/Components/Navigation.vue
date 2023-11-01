@@ -19,9 +19,12 @@ import {onMounted, ref} from "vue";
 import ApplicationLogo from "@/Components/ApplicationLogo.vue";
 import {Link, usePage} from '@inertiajs/vue3'
 import axios from "axios";
+import ProfileDropdown from "@/Components/ProfileDropdown.vue";
 
 const promoMessage = ref<string | null>(null);
 const page = usePage();
+
+const {auth} = usePage().props;
 
 onMounted(async () => {
     let res = await axios.get(route('promo'));
@@ -362,7 +365,7 @@ const navigation = {
                         </PopoverGroup>
 
                         <div class="ml-auto flex items-center">
-                            <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                            <div v-if="!auth.user" class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                                 <Link :href="route('login')"
                                       class="text-sm font-medium text-gray-700 hover:text-gray-800">Zaloguj się
                                 </Link>
@@ -382,20 +385,7 @@ const navigation = {
                                 </a>
                             </div>
 
-                            <!--  Profile  -->
-                            <div class="flex lg:ml-6">
-                                <Link
-                                    :href="route('logout')"
-                                    class="p-2 text-gray-400 hover:text-gray-500"
-                                    method="POST"
-                                    as="button"
-                                    type="button"
-                                >
-                                    <span class="sr-only">Profile</span>
-                                    <UserCircleIcon class="h-6 w-6 text-gray-500" />
-
-                                </Link>
-                            </div>
+                          <ProfileDropdown v-if="auth.user"/>
 
                             <!-- Search -->
                             <div class="flex lg:ml-6">

@@ -12,6 +12,9 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/rejestracja', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('/rejestracja', [RegisteredUserController::class, 'store'])->name('register');
+});
 
+
+Route::middleware('auth')->group(function () {
     Route::post('/wyloguj', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
