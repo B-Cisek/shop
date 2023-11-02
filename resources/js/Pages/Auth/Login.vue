@@ -7,6 +7,7 @@ import {useForm, Link} from "@inertiajs/vue3";
 import {ChevronLeftIcon} from "@heroicons/vue/24/outline";
 import Checkbox from "@/Components/core/Checkbox.vue";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
+import InputError from "@/Components/core/InputError.vue";
 
 type LoginPayload = {
     email: string,
@@ -47,10 +48,12 @@ const signIn = (): void => {
                             type="email"
                             autocomplete="email"
                             v-model="form.email"
-                            class="w-full mt-2"
+                            class="w-full mt-2 mb-2"
+                            :class="{ 'border-red-600 border-2 focus:border-red-600 focus:ring-red-600': form.errors.email }"
                             autofocus
                             required
                         />
+                        <InputError :message="form.errors.email"/>
                     </div>
 
                     <div>
@@ -58,7 +61,7 @@ const signIn = (): void => {
                             <InputLabel for="password" value="Hasło"/>
                             <div class="text-sm">
                                 <Link
-                                    :href="route('forgot-password')"
+                                    :href="route('password.request')"
                                     class="font-semibold text-indigo-600 hover:text-indigo-500">
                                     Nie pamiętasz hasła?
                                 </Link>
@@ -70,10 +73,12 @@ const signIn = (): void => {
                             name="password"
                             type="password"
                             v-model="form.password"
-                            class="w-full mt-2"
+                            class="w-full mt-2 mb-2"
+                            :class="{ 'border-red-600 border-2 focus:border-red-600 focus:ring-red-600': form.errors.password }"
                             autocomplete="current-password"
                             required
                         />
+                        <InputError :message="form.errors.password"/>
                     </div>
 
                     <div class="inline-flex gap-2">
