@@ -24,6 +24,7 @@ import {useCartToggleStore} from "@/stores/cartToggle";
 
 const cartToggle = useCartToggleStore();
 const promoMessage = ref<string | null>(null);
+const emailVerified = ref<boolean>(true);
 const page = usePage();
 
 const {auth} = usePage().props;
@@ -31,6 +32,7 @@ const {auth} = usePage().props;
 onMounted(async () => {
     let res = await axios.get(route('promo'));
     promoMessage.value = res.data.message;
+    emailVerified.value = res.data.emailVerified;
 });
 
 const open = ref(false)
@@ -273,7 +275,8 @@ const navigation = {
 
         <header class="relative bg-white z-40">
             <p v-if="promoMessage"
-               class="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8"
+               class="flex h-10 items-center justify-center px-4 text-sm font-medium text-white sm:px-6 lg:px-8"
+               :class="emailVerified ? 'bg-indigo-600' : 'bg-red-500'"
             >{{ promoMessage }}</p>
 
             <nav aria-label="Top" class="mx-auto max-w-7xl px-4">

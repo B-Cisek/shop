@@ -2,6 +2,7 @@
 import Navigation from "@/Components/Navigation.vue";
 import ShoppingCart from "@/Components/ShoppingCart.vue";
 import Footer from "@/Components/Footer.vue";
+import PromoSection from "@/Components/PromoSection.vue";
 </script>
 
 <template>
